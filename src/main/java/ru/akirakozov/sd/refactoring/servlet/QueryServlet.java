@@ -1,5 +1,7 @@
 package ru.akirakozov.sd.refactoring.servlet;
 
+import ru.akirakozov.sd.refactoring.database.Database;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,19 +16,19 @@ public class QueryServlet extends HttpServlet {
         String command = request.getParameter("command");
 
         if ("max".equals(command)) {
-            Utils.genericQuery("SELECT * FROM PRODUCT ORDER BY PRICE DESC LIMIT 1",
+            Utils.genericQuery(Database.maxQuery(),
                     "<h1>Product with max price: </h1>",
                     true, false, response);
         } else if ("min".equals(command)) {
-            Utils.genericQuery("SELECT * FROM PRODUCT ORDER BY PRICE LIMIT 1",
+            Utils.genericQuery(Database.minQuery(),
                     "<h1>Product with min price: </h1>",
                     true, false, response);
         } else if ("sum".equals(command)) {
-            Utils.genericQuery("SELECT SUM(price) FROM PRODUCT",
+            Utils.genericQuery(Database.sumQuery(),
                     "Summary price: ",
                     true, true, response);
         } else if ("count".equals(command)) {
-            Utils.genericQuery("SELECT COUNT(*) FROM PRODUCT",
+            Utils.genericQuery(Database.countQuery(),
                     "Number of products: ",
                     true, true, response);
         } else {

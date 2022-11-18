@@ -25,6 +25,7 @@ public class Utils {
                     if (isFunction) {
                         htmlFormater.addFunctionResult(rs.getInt(1));
                     } else {
+
                         List<Product> products = new LinkedList<>();
                         while (rs.next()) {
                             products.add(new Product(rs.getString("name"), rs.getInt("price")));
